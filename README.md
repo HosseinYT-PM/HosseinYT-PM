@@ -1,16 +1,18 @@
-## Hi there 👋
+# Welcome to HosseinYT-PM
 
-<!--
-**HosseinYT-PM/HosseinYT-PM** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+![Profile Banner](banner.png)
 
-Here are some ideas to get you started:
+• PHP
+• Python
+• C & C++
+• Web Languages
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## 🛠️ Language
+<p align="left">
+  <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP">
+  <img src="https://img.shields.io/badge/PhpStorm-000000?style=for-the-badge&logo=PhpStorm&logoColor=white" alt="PhpStorm">
+</p>
+
+## 📊 GitHub Stats
+[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=HosseinYT-PM&show_icons=true&theme=radical)](https://github.com/HosseinYT-PM)
+[![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=HosseinYT-PM&layout=compact&theme=radical)](https://github.com/HosseinYT-PM)
