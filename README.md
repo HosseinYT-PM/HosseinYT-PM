@@ -2,15 +2,15 @@
 
 ![Profile Banner](banner.png)
 
-• PHP
-• Python
-• C & C++
-• Web Languages
+• PHP </br>
+• Python</br>
+• C & C++</br>
+• Web Languages</br>
 
 ## 🛠️ Language
 <p align="left">
-  <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP">
-  <img src="https://img.shields.io/badge/PhpStorm-000000?style=for-the-badge&logo=PhpStorm&logoColor=white" alt="PhpStorm">
+  <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP"></br>
+  <img src="https://img.shields.io/badge/PhpStorm-000000?style=for-the-badge&logo=PhpStorm&logoColor=white" alt="PhpStorm"></br>
 </p>
 
 ## 📊 GitHub Stats
