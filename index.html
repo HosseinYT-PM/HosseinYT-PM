@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HZREZAEE | حسین رضائی - رزومه و نمونه کار</title>
+    <meta name="description" content="حسین رضائی - دانشجوی مهندسی برق، برنامه‌نویس و طراح. مشاهده رزومه، نمونه کارها و خدمات.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== همان استایل‌های قبلی ===== */
+        @font-face {
+            font-family: 'Doran';
+            src: url('../fonts/Doran-ExtraBold.woff') format('woff');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Plasma';
+            src: url('../fonts/Plasma-Circle-Dots.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #0d1117;
+            --accent-color: #00b4d8;
+            --accent-glow: #48cae4;
+            --text-color: #c0c0c0;
+            --text-color-light: #e0e0e0;
+            --text-color-dark: #8b8b8b;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --error-color: #e74c3c;
+            --border-color: #2a2a2a;
+            --card-bg-color: rgba(22, 27, 34, 0.85);
+            --glass-bg: rgba(13, 17, 23, 0.75);
+            --header-height: 80px;
+            --transition-speed: 0.3s;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            --text-glow: 0 0 10px rgba(0, 180, 216, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--header-height);
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'Doran', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .preloader-content {
+            text-align: center;
+        }
+        .preloader-logo {
+            font-family: 'Plasma', 'Doran', sans-serif;
+            font-size: 3rem;
+            color: var(--accent-color);
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(0, 180, 216, 0.6);
+            animation: preloaderPulse 1.5s ease-in-out infinite;
+        }
+        .preloader-bar {
+            width: 200px;
+            height: 3px;
+            background: var(--border-color);
+            border-radius: 3px;
+            margin: 20px auto 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .preloader-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 50%;
+            background: var(--accent-color);
+            border-radius: 3px;
+            animation: preloaderSlide 1.2s ease-in-out infinite;
+        }
+        @keyframes preloaderPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+        }
+        @keyframes preloaderSlide {
+            0% { right: 100%; }
+            100% { right: -50%; }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            z-index: 100;
+            background: rgba(13, 17, 23, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            transition: all var(--transition-speed) ease;
+        }
+        .header.scrolled {
+            background: rgba(13, 17, 23, 0.97);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+        .logo {
+            font-family: 'Plasma', 'Doran', sans-serif;
+            font-size: 1.6rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-shadow: var(--text-glow);
+            transition: all var(--transition-speed) ease;
+            cursor: pointer;
+            user-select: none;
+        }
+        .logo:hover {
+            text-shadow: 0 0 20px rgba(0, 180, 216, 0.8);
+            transform: scale(1.05);
+        }
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all var(--transition-speed) ease;
+            position: relative;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-menu a svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            border-radius: 2px;
+            transition: width var(--transition-speed) ease;
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--accent-color);
+        }
+        .nav-menu a:hover::after, .nav-menu a.active::after {
+            width: 70%;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            background: none;
+            border: none;
+            z-index: 101;
+        }
+        .hamburger span {
+            width: 28px;
+            height: 2px;
+            background: var(--text-color-light);
+            border-radius: 2px;
+            transition: all 0.4s ease;
+            transform-origin: center;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+            background: var(--accent-color);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+            background: var(--accent-color);
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 17, 23, 0.98);
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(20px);
+        }
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .mobile-overlay a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            padding: 12px 24px;
+            transition: all var(--transition-speed) ease;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .mobile-overlay a svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .mobile-overlay a:hover {
+            color: var(--accent-color);
+            background: rgba(0, 180, 216, 0.1);
+            transform: scale(1.05);
+        }
+
+        /* Main */
+        .main {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: calc(var(--header-height) + 40px) 0 60px;
+            position: relative;
+        }
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-color-dark);
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+            animation: fadeInDown 0.8s ease both;
+        }
+        .hero-title {
+            font-family: 'Plasma', 'Doran', 'Vazirmatn', sans-serif;
+            font-size: clamp(2.8rem, 8vw, 6.5rem);
+            font-weight: bold;
+            color: var(--text-color-light);
+            letter-spacing: 4px;
+            text-shadow: 0 0 30px rgba(0, 180, 216, 0.3);
+            animation: fadeInUp 0.8s ease 0.2s both;
+            min-height: 1.5em;
+            direction: ltr;
+        }
+        .hero-title .cursor {
+            display: inline-block;
+            width: 4px;
+            height: 0.9em;
+            background: var(--accent-color);
+            margin-right: 4px;
+            vertical-align: text-bottom;
+            animation: blinkCursor 0.8s step-end infinite;
+            box-shadow: 0 0 12px var(--accent-glow);
+            border-radius: 2px;
+        }
+        @keyframes blinkCursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .hero-description {
+            font-size: 1.15rem;
+            color: var(--text-color);
+            max-width: 600px;
+            margin-top: 24px;
+            line-height: 2;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            margin-top: 36px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Vazirmatn', 'Doran', sans-serif;
+        }
+        .btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-color), #0077b6);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(0, 180, 216, 0.4);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 6px 30px rgba(0, 180, 216, 0.6);
+            transform: translateY(-3px);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+        .btn-outline:hover {
+            background: rgba(0, 180, 216, 0.1);
+            box-shadow: 0 0 25px rgba(0, 180, 216, 0.3);
+            transform: translateY(-3px);
+        }
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-color-dark);
+            font-size: 1.5rem;
+            animation: bounceDown 2s ease-in-out infinite;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .hero-scroll-indicator svg {
+            width: 32px;
+            height: 32px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        @keyframes bounceDown {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(12px); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Section */
+        .section { padding: 80px 0; position: relative; }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-color-light);
+            text-align: center;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 12px auto 0;
+            border-radius: 3px;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-color-dark);
+            font-size: 1rem;
+            margin-bottom: 48px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .about-text {
+            color: var(--text-color);
+            font-size: 1.05rem;
+            line-height: 2.2;
+        }
+        .about-text .highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+            text-shadow: var(--text-glow);
+        }
+        .about-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .about-avatar {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 180, 216, 0.4);
+            animation: floatAvatar 4s ease-in-out infinite;
+            background: linear-gradient(135deg, var(--accent-color), #0077b6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid var(--accent-color);
+        }
+        .about-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .about-avatar .avatar-fallback {
+            font-size: 3.5rem;
+            color: #fff;
+        }
+        @keyframes floatAvatar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .skill-card {
+            background: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 28px;
+            transition: all var(--transition-speed) ease;
+            backdrop-filter: blur(10px);
+        }
+        .skill-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 30px rgba(0, 180, 216, 0.15);
+            transform: translateY(-5px);
+        }
+        .skill-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .skill-name {
+            font-weight: 700;
+            color: var(--text-color-light);
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .skill-name .icon {
+            font-size: 1.4rem;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .skill-name .icon svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: var(--accent-color);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .skill-percent {
+            font-weight: 800;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            text-shadow: var(--text-glow);
+        }
+        .skill-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-glow));
+            border-radius: 10px;
+            width: 0;
+            transition: width 1.5s ease;
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.5);
+            position: relative;
+        }
+        .skill-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 2s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .portfolio-item {
+            background: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: all var(--transition-speed) ease;
+            cursor: pointer;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        .portfolio-item:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 40px rgba(0, 180, 216, 0.2);
+            transform: translateY(-8px);
+        }
+        .portfolio-thumbnail {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #1a2a3a, #0d1117);
+            position: relative;
+            overflow: hidden;
+        }
+        .portfolio-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .portfolio-item:hover .portfolio-thumbnail img {
+            transform: scale(1.05);
+        }
+        .portfolio-thumbnail .fallback-icon {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--text-color-dark);
+            opacity: 0.6;
+        }
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(13, 17, 23, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all var(--transition-speed) ease;
+            backdrop-filter: blur(4px);
+        }
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        .portfolio-overlay-text {
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-shadow: var(--text-glow);
+        }
+        .portfolio-info {
+            padding: 20px;
+        }
+        .portfolio-title {
+            font-weight: 700;
+            color: var(--text-color-light);
+            font-size: 1.05rem;
+            margin-bottom: 6px;
+        }
+        .portfolio-category {
+            font-size: 0.85rem;
+            color: var(--text-color-dark);
+        }
+        .portfolio-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 50px;
+            background: rgba(0, 180, 216, 0.15);
+            color: var(--accent-color);
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+        .service-card {
+            background: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 32px 24px;
+            text-align: center;
+            transition: all var(--transition-speed) ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            opacity: 0;
+            transition: opacity var(--transition-speed) ease;
+        }
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        .service-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 35px rgba(0, 180, 216, 0.15);
+            transform: translateY(-8px);
+        }
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 180, 216, 0.1);
+        }
+        .service-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: none;
+            stroke: var(--accent-color);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .service-title {
+            font-weight: 700;
+            color: var(--text-color-light);
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+        }
+        .service-desc {
+            font-size: 0.9rem;
+            color: var(--text-color-dark);
+            line-height: 1.8;
+        }
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 14px;
+        }
+        .service-tag {
+            font-size: 0.7rem;
+            padding: 3px 10px;
+            border-radius: 50px;
+            background: rgba(0, 180, 216, 0.1);
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        /* Games */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .game-card {
+            background: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 32px;
+            text-align: center;
+            transition: all var(--transition-speed) ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+        .game-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 35px rgba(0, 180, 216, 0.2);
+            transform: translateY(-8px) scale(1.02);
+        }
+        .game-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: gameFloat 3s ease-in-out infinite;
+        }
+        .game-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: none;
+            stroke: var(--accent-color);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        @keyframes gameFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+        }
+        .game-title {
+            font-weight: 700;
+            color: var(--text-color-light);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        .game-desc {
+            font-size: 0.9rem;
+            color: var(--text-color-dark);
+            line-height: 1.8;
+        }
+        .game-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 50px;
+            background: rgba(0, 180, 216, 0.15);
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 14px;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(13, 17, 23, 0.95);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 0 30px;
+            position: relative;
+            z-index: 1;
+            margin-top: 60px;
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-brand .logo {
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+        .footer-brand p {
+            color: var(--text-color-dark);
+            font-size: 0.9rem;
+            line-height: 2;
+        }
+        .footer-title {
+            color: var(--text-color-light);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        .footer-links a {
+            color: var(--text-color-dark);
+            text-decoration: none;
+            transition: all var(--transition-speed) ease;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-links a svg {
+            width: 16px;
+            height: 16px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .footer-links a:hover {
+            color: var(--accent-color);
+            transform: translateX(-6px);
+            text-shadow: var(--text-glow);
+        }
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .footer-social a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(42, 42, 42, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all var(--transition-speed) ease;
+            border: 1px solid var(--border-color);
+        }
+        .footer-social a svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .footer-social a:hover {
+            background: var(--accent-color);
+            color: #fff;
+            box-shadow: 0 0 25px rgba(0, 180, 216, 0.5);
+            transform: translateY(-4px);
+            border-color: var(--accent-color);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-color-dark);
+            font-size: 0.85rem;
+        }
+        .footer-bottom a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Contact form */
+        .contact-form {
+            display: grid;
+            gap: 16px;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            background: rgba(42, 42, 42, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px 16px;
+            color: var(--text-color-light);
+            font-family: 'Vazirmatn', 'Doran', sans-serif;
+            font-size: 0.9rem;
+            transition: all var(--transition-speed) ease;
+            outline: none;
+            width: 100%;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px rgba(0, 180, 216, 0.2);
+            background: rgba(42, 42, 42, 0.7);
+        }
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .contact-form .btn {
+            width: fit-content;
+            justify-self: start;
+        }
+
+        /* Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .about-avatar {
+                margin: 0 auto;
+            }
+            .hero-title {
+                font-size: clamp(2.2rem, 7vw, 4.5rem);
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .hero-title {
+                font-size: clamp(1.8rem, 6vw, 3.2rem);
+                letter-spacing: 2px;
+            }
+            .hero-description {
+                font-size: 0.95rem;
+            }
+            .section {
+                padding: 50px 0;
+            }
+            .section-title {
+                font-size: 1.7rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+            .btn {
+                padding: 12px 24px;
+                font-size: 0.85rem;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+        @media (max-width: 480px) {
+            .main { padding: 0 16px; }
+            .hero-title {
+                font-size: clamp(1.5rem, 5vw, 2.2rem);
+                letter-spacing: 1px;
+            }
+            .portfolio-grid,
+            .services-grid,
+            .games-grid,
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-avatar {
+                width: 160px;
+                height: 160px;
+            }
+            .about-avatar .avatar-fallback {
+                font-size: 2.5rem;
+            }
+            .header-inner { padding: 0 16px; }
+            .logo { font-size: 1.3rem; }
+            .footer { padding: 40px 0 20px; }
+            .footer-inner { padding: 0 16px; }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--secondary-color); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+
+        ::selection {
+            background: rgba(0, 180, 216, 0.3);
+            color: var(--text-color-light);
+        }
+
+        /* fallback for images */
+        .portfolio-thumbnail img.error,
+        .about-avatar img.error {
+            display: none;
+        }
+        .portfolio-thumbnail .fallback-icon {
+            display: none;
+        }
+        .portfolio-thumbnail img.error ~ .fallback-icon {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">HZREZAEE</div>
+            <div class="preloader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Particles Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#" class="logo" id="logo-link">HZREZAEE</a>
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#home" class="active">
+                        <svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9"/><path d="M5 10v10a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V10"/></svg>
+                        خانه</a></li>
+                    <li><a href="#about">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/></svg>
+                        درباره من</a></li>
+                    <li><a href="#skills">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                        مهارت‌ها</a></li>
+                    <li><a href="#portfolio">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                        نمونه کارها</a></li>
+                    <li><a href="#services">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+                        خدمات</a></li>
+                    <li><a href="#games">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4"/><path d="M8 10v4"/><path d="M15 11h.01"/><path d="M18 13h.01"/></svg>
+                        بازی‌ها</a></li>
+                    <li><a href="#contact">
+                        <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+                        تماس</a></li>
+                </ul>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="منو">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-overlay" id="mobile-overlay">
+        <a href="#home"><svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9"/><path d="M5 10v10a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1V10"/></svg> خانه</a>
+        <a href="#about"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/></svg> درباره من</a>
+        <a href="#skills"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> مهارت‌ها</a>
+        <a href="#portfolio"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg> نمونه کارها</a>
+        <a href="#services"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg> خدمات</a>
+        <a href="#games"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4"/><path d="M8 10v4"/><path d="M15 11h.01"/><path d="M18 13h.01"/></svg> بازی‌ها</a>
+        <a href="#contact"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg> تماس</a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <p class="hero-subtitle">به دنیای دیجیتال خوش آمدید</p>
+            <h1 class="hero-title" id="typing-title">
+                <span id="typed-text"></span><span class="cursor">|</span>
+            </h1>
+            <p class="hero-description">
+                حسین رضائی هستم، دانشجوی مهندسی برق، عاشق برنامه‌نویسی و دنیای تکنولوژی.
+                اینجا می‌تونی رزومه، مهارت‌ها و نمونه کارهای من رو ببینی.
+            </p>
+            <div class="hero-buttons">
+                <a href="#portfolio" class="btn btn-primary">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                    مشاهده نمونه کارها
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+                    تماس با من
+                </a>
+            </div>
+            <a href="#about" class="hero-scroll-indicator" aria-label="اسکرول به پایین">
+                <svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/></svg>
+            </a>
+        </section>
+
+        <!-- About Section -->
+        <section class="section" id="about">
+            <h2 class="section-title reveal">درباره من</h2>
+            <p class="section-subtitle reveal reveal-delay-1">آشنایی بیشتر با حسین رضائی</p>
+            <div class="about-content">
+                <div class="about-text reveal reveal-delay-2">
+                    <p>
+                        سلام! من <span class="highlight">حسین رضائی</span> هستم، دانشجوی رشته
+                        <span class="highlight">مهندسی برق</span> و علاقه‌مند به دنیای
+                        <span class="highlight">برنامه‌نویسی</span> و تکنولوژی.
+                        از همون ابتدای آشنایی با کامپیوتر، عاشق خلق کردن چیزهای جدید با کد شدم.
+                    </p>
+                    <br>
+                    <p>
+                        در کنار تحصیل، به صورت حرفه‌ای در زمینه‌های
+                        <span class="highlight">طراحی وب</span>،
+                        <span class="highlight">توسعه ربات‌های تلگرام و روبیکا</span>،
+                        <span class="highlight">فتوشاپ</span> و
+                        <span class="highlight">ادیت ویدئو</span> فعالیت می‌کنم.
+                        همچنین علاقه خاصی به دنیای <span class="highlight">گیم و ماینکرافت</span> دارم
+                        و پلاگین‌ها و کانفیگ‌های آماده برای سرورهای جاوا و بدراک می‌سازم.
+                    </p>
+                    <br>
+                    <p>
+                        هدف من ترکیب دانش مهندسی برق با مهارت‌های برنامه‌نویسی برای خلق
+                        راه‌حل‌های خلاقانه و کاربردی است. من همیشه به دنبال یادگیری تکنولوژی‌های
+                        جدید و بهبود مهارت‌هام هستم.
+                    </p>
+                </div>
+                <div class="about-image reveal reveal-delay-3">
+                    <div class="about-avatar">
+                        <img src="../images/avatar.jpg" alt="حسین رضائی" onerror="this.classList.add('error'); this.parentNode.querySelector('.avatar-fallback').style.display='flex';">
+                        <span class="avatar-fallback" style="display:none;">HZ</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="section" id="skills">
+            <h2 class="section-title reveal">مهارت‌ها و زبان‌ها</h2>
+            <p class="section-subtitle reveal reveal-delay-1">تسلط من بر زبان‌ها و ابزارهای برنامه‌نویسی</p>
+            <div class="skills-grid">
+                <div class="skill-card reveal reveal-delay-1">
+                    <div class="skill-card-header">
+                        <span class="skill-name"><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span> پایتون</span>
+                        <span class="skill-percent">۹۰٪</span>
+                    </div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="90%"></div></div>
+                </div>
+                <div class="skill-card reveal reveal-delay-2">
+                    <div class="skill-card-header">
+                        <span class="skill-name"><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span> HTML و CSS</span>
+                        <span class="skill-percent">۹۵٪</span>
+                    </div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="95%"></div></div>
+                </div>
+                <div class="skill-card reveal reveal-delay-1">
+                    <div class="skill-card-header">
+                        <span class="skill-name"><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span> JavaScript</span>
+                        <span class="skill-percent">۸۵٪</span>
+                    </div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="85%"></div></div>
+                </div>
+                <div class="skill-card reveal reveal-delay-2">
+                    <div class="skill-card-header">
+                        <span class="skill-name"><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span> ربات تلگرام و روبیکا</span>
+                        <span class="skill-percent">۸۸٪</span>
+                    </div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="88%"></div></div>
+                </div>
+                <div class="skill-card reveal reveal-delay-1">
+                    <div class="skill-card-header">
+                        <span class="skill-name"><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span> فتوشاپ</span>
+                        <span class="skill-percent">۸۲٪</span>
+                    </div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="82%"></div></div>
+                </div>
+                <div class="skill-card reveal reveal-delay-2">
+                    <div class="skill-card-header">
+                        <span class="skill-name"><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span> پلاگین ماینکرافت</span>
+                        <span class="skill-percent">۷۵٪</span>
+                    </div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="75%"></div></div>
+                </div>
+                <div class="skill-card reveal reveal-delay-1">
+                    <div class="skill-card-header">
+                        <span class="skill-name"><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span> طراحی ریسپانسیو</span>
+                        <span class="skill-percent">۹۲٪</span>
+                    </div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="92%"></div></div>
+                </div>
+                <div class="skill-card reveal reveal-delay-2">
+                    <div class="skill-card-header">
+                        <span class="skill-name"><span class="icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span> ادیت ویدئو</span>
+                        <span class="skill-percent">۷۸٪</span>
+                    </div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="78%"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section class="section" id="portfolio">
+            <h2 class="section-title reveal">نمونه کارها</h2>
+            <p class="section-subtitle reveal reveal-delay-1">پروژه‌های منتخب من در زمینه‌های مختلف</p>
+            <div class="portfolio-grid">
+                <div class="portfolio-item reveal reveal-delay-1">
+                    <div class="portfolio-thumbnail">
+                        <img src="../images/portfolio1.jpg" alt="وب‌سایت فروشگاهی" onerror="this.classList.add('error');">
+                        <span class="fallback-icon">🌐</span>
+                    </div>
+                    <div class="portfolio-overlay"><span class="portfolio-overlay-text">مشاهده پروژه</span></div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-title">وب‌سایت فروشگاهی</div>
+                        <div class="portfolio-category">طراحی سایت</div>
+                        <span class="portfolio-tag">HTML/CSS/JS</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal reveal-delay-2">
+                    <div class="portfolio-thumbnail">
+                        <img src="../images/portfolio2.jpg" alt="ربات مدیریت گروه تلگرام" onerror="this.classList.add('error');">
+                        <span class="fallback-icon">🤖</span>
+                    </div>
+                    <div class="portfolio-overlay"><span class="portfolio-overlay-text">مشاهده پروژه</span></div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-title">ربات مدیریت گروه تلگرام</div>
+                        <div class="portfolio-category">ربات تلگرام</div>
+                        <span class="portfolio-tag">Python</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal reveal-delay-3">
+                    <div class="portfolio-thumbnail">
+                        <img src="../images/portfolio3.jpg" alt="طراحی لوگو و پوستر" onerror="this.classList.add('error');">
+                        <span class="fallback-icon">🎨</span>
+                    </div>
+                    <div class="portfolio-overlay"><span class="portfolio-overlay-text">مشاهده پروژه</span></div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-title">طراحی لوگو و پوستر</div>
+                        <div class="portfolio-category">فتوشاپ</div>
+                        <span class="portfolio-tag">Adobe Photoshop</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal reveal-delay-1">
+                    <div class="portfolio-thumbnail">
+                        <img src="../images/portfolio4.jpg" alt="پلاگین اختصاصی ماینکرافت" onerror="this.classList.add('error');">
+                        <span class="fallback-icon">🎮</span>
+                    </div>
+                    <div class="portfolio-overlay"><span class="portfolio-overlay-text">مشاهده پروژه</span></div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-title">پلاگین اختصاصی ماینکرافت</div>
+                        <div class="portfolio-category">بازی</div>
+                        <span class="portfolio-tag">Java</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal reveal-delay-2">
+                    <div class="portfolio-thumbnail">
+                        <img src="../images/portfolio5.jpg" alt="ربات اطلاع‌رسانی روبیکا" onerror="this.classList.add('error');">
+                        <span class="fallback-icon">📱</span>
+                    </div>
+                    <div class="portfolio-overlay"><span class="portfolio-overlay-text">مشاهده پروژه</span></div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-title">ربات اطلاع‌رسانی روبیکا</div>
+                        <div class="portfolio-category">ربات روبیکا</div>
+                        <span class="portfolio-tag">Python</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal reveal-delay-3">
+                    <div class="portfolio-thumbnail">
+                        <img src="../images/portfolio6.jpg" alt="ادیت ویدئو تبلیغاتی" onerror="this.classList.add('error');">
+                        <span class="fallback-icon">🎬</span>
+                    </div>
+                    <div class="portfolio-overlay"><span class="portfolio-overlay-text">مشاهده پروژه</span></div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-title">ادیت ویدئو تبلیغاتی</div>
+                        <div class="portfolio-category">ادیت ویدئو</div>
+                        <span class="portfolio-tag">Premiere Pro</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal reveal-delay-1">
+                    <div class="portfolio-thumbnail">
+                        <img src="../images/portfolio7.jpg" alt="کانفیگ کامل سرور ماینکرافت" onerror="this.classList.add('error');">
+                        <span class="fallback-icon">🔧</span>
+                    </div>
+                    <div class="portfolio-overlay"><span class="portfolio-overlay-text">مشاهده پروژه</span></div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-title">کانفیگ کامل سرور ماینکرافت</div>
+                        <div class="portfolio-category">بازی</div>
+                        <span class="portfolio-tag">Minecraft</span>
+                    </div>
+                </div>
+                <div class="portfolio-item reveal reveal-delay-2">
+                    <div class="portfolio-thumbnail">
+                        <img src="../images/portfolio8.jpg" alt="طراحی تایپوگرافی" onerror="this.classList.add('error');">
+                        <span class="fallback-icon">✏️</span>
+                    </div>
+                    <div class="portfolio-overlay"><span class="portfolio-overlay-text">مشاهده پروژه</span></div>
+                    <div class="portfolio-info">
+                        <div class="portfolio-title">طراحی تایپوگرافی</div>
+                        <div class="portfolio-category">فتوشاپ</div>
+                        <span class="portfolio-tag">Typography</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="section" id="services">
+            <h2 class="section-title reveal">پذیرش پروژه جدید</h2>
+            <p class="section-subtitle reveal reveal-delay-1">خدماتی که می‌تونم به شما ارائه بدم</p>
+            <div class="services-grid">
+                <div class="service-card reveal reveal-delay-1">
+                    <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8" cy="8" r="1"/><circle cx="16" cy="16" r="1"/></svg></div>
+                    <div class="service-title">فتوشاپ</div>
+                    <p class="service-desc">خدمات حرفه‌ای طراحی و ادیت عکس با بالاترین کیفیت</p>
+                    <div class="service-tags">
+                        <span class="service-tag">ادیت عکس</span>
+                        <span class="service-tag">روتوش عکس</span>
+                        <span class="service-tag">طراحی لوگو</span>
+                        <span class="service-tag">پوستر</span>
+                        <span class="service-tag">تایپوگرافی</span>
+                    </div>
+                </div>
+                <div class="service-card reveal reveal-delay-2">
+                    <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 12h20"/><path d="M12 2v20"/></svg></div>
+                    <div class="service-title">طراحی سایت</div>
+                    <p class="service-desc">ساخت وب‌سایت‌های مدرن، ریسپانسیو و حرفه‌ای با جدیدترین تکنولوژی‌ها</p>
+                    <div class="service-tags">
+                        <span class="service-tag">سایت شخصی</span>
+                        <span class="service-tag">فروشگاهی</span>
+                        <span class="service-tag">شرکتی</span>
+                        <span class="service-tag">ریسپانسیو</span>
+                    </div>
+                </div>
+                <div class="service-card reveal reveal-delay-3">
+                    <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                    <div class="service-title">ربات تلگرام و روبیکا</div>
+                    <p class="service-desc">توسعه ربات‌های هوشمند و کاربردی با امکانات پیشرفته</p>
+                    <div class="service-tags">
+                        <span class="service-tag">ربات مدیریتی</span>
+                        <span class="service-tag">ربات فروش</span>
+                        <span class="service-tag">ربات اطلاع‌رسانی</span>
+                        <span class="service-tag">اختصاصی</span>
+                    </div>
+                </div>
+                <div class="service-card reveal reveal-delay-1">
+                    <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/></svg></div>
+                    <div class="service-title">ادیت ویدئو</div>
+                    <p class="service-desc">ادیت حرفه‌ای ویدئو برای شبکه‌های اجتماعی و تبلیغات</p>
+                    <div class="service-tags">
+                        <span class="service-tag">ادیت حرفه‌ای</span>
+                        <span class="service-tag">موشن گرافیک</span>
+                        <span class="service-tag">ویدئو تبلیغاتی</span>
+                    </div>
+                </div>
+                <div class="service-card reveal reveal-delay-2">
+                    <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4"/><path d="M8 10v4"/><path d="M15 11h.01"/><path d="M18 13h.01"/></svg></div>
+                    <div class="service-title">پلاگین و کانفیگ ماینکرافت</div>
+                    <p class="service-desc">ساخت پلاگین‌های اختصاصی و کانفیگ‌های کامل برای سرورهای جاوا و بدراک</p>
+                    <div class="service-tags">
+                        <span class="service-tag">جاوا</span>
+                        <span class="service-tag">بدراک</span>
+                        <span class="service-tag">پلاگین</span>
+                        <span class="service-tag">کانفیگ آماده</span>
+                    </div>
+                </div>
+                <div class="service-card reveal reveal-delay-3">
+                    <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg></div>
+                    <div class="service-title">مشاوره فنی</div>
+                    <p class="service-desc">مشاوره تخصصی در زمینه برنامه‌نویسی، طراحی و راه‌اندازی پروژه‌ها</p>
+                    <div class="service-tags">
+                        <span class="service-tag">مشاوره</span>
+                        <span class="service-tag">آموزش</span>
+                        <span class="service-tag">راه‌اندازی</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Games Section -->
+        <section class="section" id="games">
+            <h2 class="section-title reveal">پروژه‌های بازی</h2>
+            <p class="section-subtitle reveal reveal-delay-1">پلاگین‌ها و کانفیگ‌های آماده ماینکرافت</p>
+            <div class="games-grid">
+                <div class="game-card reveal reveal-delay-1">
+                    <div class="game-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4"/><path d="M8 10v4"/><path d="M15 11h.01"/><path d="M18 13h.01"/></svg></div>
+                    <div class="game-title">پلاگین ماینکرافت جاوا</div>
+                    <p class="game-desc">توسعه پلاگین‌های اختصاصی برای سرورهای ماینکرافت جاوا با امکانات سفارشی، سیستم‌های اقتصادی، مینی‌گیم و مدیریت کامل سرور.</p>
+                    <span class="game-badge">Java Edition</span>
+                </div>
+                <div class="game-card reveal reveal-delay-2">
+                    <div class="game-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4"/><path d="M8 10v4"/><path d="M15 11h.01"/><path d="M18 13h.01"/></svg></div>
+                    <div class="game-title">پلاگین ماینکرافت بدراک</div>
+                    <p class="game-desc">پلاگین‌ها و ادان‌های اختصاصی برای سرورهای بدراک با تمرکز بر عملکرد بهینه، امنیت بالا و تجربه کاربری عالی برای بازیکنان.</p>
+                    <span class="game-badge">Bedrock Edition</span>
+                </div>
+                <div class="game-card reveal reveal-delay-3">
+                    <div class="game-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4"/><path d="M8 10v4"/><path d="M15 11h.01"/><path d="M18 13h.01"/></svg></div>
+                    <div class="game-title">کانفیگ‌های آماده سرور</div>
+                    <p class="game-desc">کانفیگ‌های کامل و تست‌شده برای انواع سرورهای ماینکرافت شامل سیستم‌های رنکینگ، اقتصادی، مینی‌گیم و مدیریت پیشرفته.</p>
+                    <span class="game-badge">Ready Config</span>
+                </div>
+                <div class="game-card reveal reveal-delay-1">
+                    <div class="game-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4"/><path d="M8 10v4"/><path d="M15 11h.01"/><path d="M18 13h.01"/></svg></div>
+                    <div class="game-title">مینی‌گیم‌های اختصاصی</div>
+                    <p class="game-desc">ساخت مینی‌گیم‌های سفارشی و هیجان‌انگیز برای سرورهای ماینکرافت با طراحی منحصربه‌فرد و گیم‌پلی اعتیادآور.</p>
+                    <span class="game-badge">Custom Minigames</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section" id="contact">
+            <h2 class="section-title reveal">ارتباط با من</h2>
+            <p class="section-subtitle reveal reveal-delay-1">برای سفارش پروژه یا هر سوالی با من در تماس باشید</p>
+            <div class="contact-form reveal reveal-delay-2" style="max-width:600px;margin:0 auto;">
+                <input type="text" placeholder="نام و نام خانوادگی" required>
+                <input type="email" placeholder="ایمیل یا شماره تماس" required>
+                <textarea placeholder="پیام شما..." required></textarea>
+                <button class="btn btn-primary" type="button">
+                    <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+                    ارسال پیام
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">HZREZAEE</a>
+                    <p>حسین رضائی - دانشجوی مهندسی برق، برنامه‌نویس و طراح. خلق تجربه‌های دیجیتال منحصربه‌فرد با جدیدترین تکنولوژی‌ها.</p>
+                </div>
+                <div>
+                    <div class="footer-title">دسترسی سریع</div>
+                    <ul class="footer-links">
+                        <li><a href="#about"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/></svg> درباره من</a></li>
+                        <li><a href="#skills"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> مهارت‌ها</a></li>
+                        <li><a href="#portfolio"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg> نمونه کارها</a></li>
+                        <li><a href="#services"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg> خدمات</a></li>
+                        <li><a href="#games"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4"/><path d="M8 10v4"/><path d="M15 11h.01"/><path d="M18 13h.01"/></svg> بازی‌ها</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-title">خدمات</div>
+                    <ul class="footer-links">
+                        <li><a href="#services"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="8" cy="8" r="1"/><circle cx="16" cy="16" r="1"/></svg> فتوشاپ</a></li>
+                        <li><a href="#services"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M2 12h20"/><path d="M12 2v20"/></svg> طراحی سایت</a></li>
+                        <li><a href="#services"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> ربات تلگرام و روبیکا</a></li>
+                        <li><a href="#services"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/></svg> ادیت ویدئو</a></li>
+                        <li><a href="#services"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4"/><path d="M8 10v4"/><path d="M15 11h.01"/><path d="M18 13h.01"/></svg> پلاگین ماینکرافت</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-title">شبکه‌های اجتماعی</div>
+                    <div class="footer-social">
+                        <a href="#" aria-label="تلگرام" title="تلگرام"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4z"/></svg></a>
+                        <a href="#" aria-label="اینستاگرام" title="اینستاگرام"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+                        <a href="#" aria-label="گیت‌هاب" title="گیت‌هاب"><svg viewBox="0 0 24 24"><path d="M9 19c-4 1.5-4-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a>
+                        <a href="#" aria-label="ایمیل" title="ایمیل"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg></a>
+                        <a href="#" aria-label="روبوکا" title="روبوکا"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© ۱۴۰۳ - تمامی حقوق برای <a href="#">HZREZAEE</a> محفوظ است. طراحی و توسعه با ❤️ توسط حسین رضائی</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => { preloader.classList.add('hidden'); }, 1200);
+        });
+
+        // Particles Canvas
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouseX = 0, mouseY = 0;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.6 + 0.2;
+                this.pulseSpeed = Math.random() * 0.02 + 0.01;
+                this.pulseOffset = Math.random() * Math.PI * 2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.opacity = 0.2 + Math.sin(Date.now() * this.pulseSpeed + this.pulseOffset) * 0.3 + 0.3;
+                if (this.x < -10 || this.x > canvas.width + 10 || this.y < -10 || this.y > canvas.height + 10) this.reset();
+            }
+            draw() {
+                const distX = this.x - mouseX;
+                const distY = this.y - mouseY;
+                const dist = Math.sqrt(distX * distX + distY * distY);
+                if (dist < 150) { this.x += distX * 0.003; this.y += distY * 0.003; }
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 180, 216, ${this.opacity})`;
+                ctx.fill();
+                ctx.shadowColor = 'rgba(0, 180, 216, 0.5)';
+                ctx.shadowBlur = 8;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(Math.floor(window.innerWidth / 15), 120);
+            for (let i = 0; i < count; i++) particles.push(new Particle());
+        }
+        initParticles();
+        window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+        document.addEventListener('touchmove', (e) => { if (e.touches.length > 0) { mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY; } });
+
+        // Typing Animation
+        const textToType = "HZREZAEE";
+        const typedTextElement = document.getElementById('typed-text');
+        let charIndex = 0, isDeleting = false, typingSpeed = 150;
+
+        function typeEffect() {
+            if (!isDeleting) {
+                typedTextElement.textContent = textToType.substring(0, charIndex + 1);
+                charIndex++;
+                if (charIndex === textToType.length) { isDeleting = true; typingSpeed = 1000; setTimeout(typeEffect, 2500); return; }
+                typingSpeed = 150;
+            } else {
+                typedTextElement.textContent = textToType.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = charIndex === 0 ? (isDeleting = false, 500) : 80;
+            }
+            setTimeout(typeEffect, typingSpeed);
+        }
+        setTimeout(typeEffect, 1400);
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+            updateActiveNav();
+        });
+
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileOverlay.classList.contains('active') ? 'hidden' : '';
+        });
+        mobileOverlay.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Active nav
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) currentSection = section.getAttribute('id');
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSection) link.classList.add('active');
+            });
+        }
+
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Skill bars
+        const skillBars = document.querySelectorAll('.skill-bar-fill');
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const fill = entry.target;
+                    setTimeout(() => { fill.style.width = fill.getAttribute('data-width'); }, 200);
+                    skillObserver.unobserve(fill);
+                }
+            });
+        }, { threshold: 0.3 });
+        skillBars.forEach(bar => skillObserver.observe(bar));
+
+        // Portfolio click
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const title = item.querySelector('.portfolio-title').textContent;
+                alert('🎯 پروژه: ' + title + '\n\nبرای مشاهده جزئیات بیشتر و سفارش پروژه با من تماس بگیرید!');
+            });
+        });
+
+        // Contact form
+        document.querySelector('.contact-form .btn').addEventListener('click', () => {
+            const inputs = document.querySelectorAll('.contact-form input, .contact-form textarea');
+            let allFilled = true;
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    allFilled = false;
+                    input.style.borderColor = 'var(--error-color)';
+                    input.style.boxShadow = '0 0 15px rgba(231, 76, 60, 0.3)';
+                    setTimeout(() => { input.style.borderColor = ''; input.style.boxShadow = ''; }, 2000);
+                }
+            });
+            if (allFilled) {
+                inputs.forEach(input => input.value = '');
+                alert('✅ پیام شما با موفقیت ارسال شد!\n\nبه زودی با شما تماس می‌گیرم.');
+            } else {
+                alert('⚠️ لطفاً تمام فیلدها را پر کنید.');
+            }
+        });
+
+        // Logo scroll to top
+        document.querySelectorAll('.logo').forEach(logo => {
+            logo.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // Escape to close mobile menu
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileOverlay.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        updateActiveNav();
+    </script>
+</body>
+</html>
